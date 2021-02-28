@@ -1,16 +1,15 @@
-const tidy = document.getElementById('tidy');
-let probability;
+const percentElement = document.getElementById('percent');
+const tidyElement = document.getElementById('tidy');
+let percent;
 
-chrome.storage.local.get('probability', (data) => {
-    probability = data.probability;
-});
-
-tidy.onclick = () => {
+tidyElement.onclick = () => {
+    percent = percentElement.value;
+    setPercent(percent);
     chrome.tabs.query({currentWindow: true}, tidyUp);
 }
 
 tidyUp = (tabs) => {
-    const numTabsToClose = Math.floor(probability * tabs.length);
+    const numTabsToClose = Math.floor(percent / 100 * tabs.length);
     const shuffledTabIds = shuffleTabIds(tabs);
     const tabsToClose = takeFirstN(shuffledTabIds, numTabsToClose);
     closeTabs(tabsToClose);
@@ -26,3 +25,18 @@ shuffleTabIds = (tabs) => {
 takeFirstN = (array, n) => array.slice(0, n);
 
 closeTabs = (ids) => chrome.tabs.remove(ids);
+
+getPercent = () => {
+    chrome.storage.local.get('percent', (data) => {
+        percent = data.percent;
+        percentElement.value = percent;
+    });
+}
+
+setPercent = (percent) => {
+    chrome.storage.local.set({percent}, function() {
+        console.log('Percent has been set.');
+    });
+}
+
+getPercent();

@@ -7,9 +7,17 @@
                 outline: none;
                 white-space: nowrap;
             }
+            button, input {
+                margin: .4rem 0;
+            }
+            label {
+                display: block;
+            }
         </style>
     </head>
     <body>
+        <label for="percent">Tidy %</label>
+        <input type="number" id="percent" name="percent" min="1" max="100">
         <button id="tidy">Tidy Up</button>
         <script src="popup.js"></script>
     </body>

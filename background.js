@@ -1,5 +1,5 @@
 chrome.runtime.onInstalled.addListener(function() {
-    chrome.storage.local.set({probability: 0.05}, function() {
-        console.log('Probability has been set.');
+    chrome.storage.local.set({percent: 5}, function() {
+        console.log('Percent has been set.');
     });
 });
