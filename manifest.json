@@ -1,0 +1,15 @@
+{
+  "name": "Marie Kondo",
+  "version": "0.1",
+  "description": "Tidy up tabs.",
+  "permissions": [ "declarativeContent", "storage", "tabs" ],
+  "background":  {
+    "scripts": [ "background.js" ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_title": "Marie Kondo",
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 2
+}
